@@ -1,8 +1,26 @@
+// v1
+// pipeline {
+//     agent any
+//     //tools {
+//     //    maven 'localMaven'
+//     //}
+//     stages {
+//         stage('Build') {
+//             steps {
+//                 sh 'mvn clean package'
+//             }
+//             post {
+//                 success {
+//                     echo 'Now Archiving...'
+//                     archiveArtifacts artifacts: '**/target/*.war'
+//                 }
+//             }
+//         }
+//     }
+// }
+// v2
 pipeline {
     agent any
-    //tools {
-    //    maven 'localMaven'
-    //}
     stages {
         stage('Build') {
             steps {
@@ -15,30 +33,13 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to Staging') {
+            steps {
+                build job: 'Deploy-to-staging'
+            }
+        }
     }
 }
-// v2
-// pipeline {
-//     agent any
-//     stages{
-//         stage('Build'){
-//             steps {
-//                 sh 'mvn clean package'
-//             }
-//             post {
-//                 success {
-//                     echo 'Now Archiving...'
-//                     archiveArtifacts artifacts: '**/target/*.war'
-//                 }
-//             }
-//         }
-//         stage ('Deploy to Staging'){
-//             steps {
-//                 build job: 'Deploy-to-staging'
-//             }
-//         }
-//     }
-// }
 // v3
 // pipeline {
 //     agent any
