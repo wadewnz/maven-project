@@ -111,13 +111,13 @@ pipeline {
             parallel {
                 stage('Deploy to Staging') {
                     steps {
-                        sh "scp -i /tmp/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/root/apache-tomcat-9.0.59/webapps"
+                        sh "scp -i /tmp/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/apache-tomcat-9.0.59/webapps"
                     }
                 }
 
                 stage('Deploy to Production') {
                     steps {
-                        sh "scp -i /tmp/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/root/apache-tomcat-9.0.59/webapps"
+                        sh "scp -i /tmp/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/apache-tomcat-9.0.59/webapps"
                     }
                 }
             }
