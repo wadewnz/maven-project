@@ -128,8 +128,9 @@
 
 pipeline {
     agent any
+
     stages {
-        state('Build') {
+        stage('Build') {
             steps {
                 bat 'mvn clean package'
             }
